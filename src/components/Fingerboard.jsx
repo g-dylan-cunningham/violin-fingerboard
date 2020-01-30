@@ -3,6 +3,9 @@ import { generateRichKey } from '../utils/generateRichKey';
 import { keyOfC } from "../notesInKeys"
 import './Fingerboard.css'
 import { QuestionContext } from '../App';
+import SoundPlayer from '../utils/soundPlayer';
+
+
 const Fingerboard = () => {
 
     const arr = generateRichKey(keyOfC).map(string => {
@@ -29,6 +32,13 @@ const String = ({arr}) => {
 }
 
 const Note = ({obj}) => {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audio = new AudioContext();
+    // console.log(audio)
+    (new SoundPlayer(audio)).play(440.0, 0.8, "sine").stop(0.5);
+
+
+
     return (
         <QuestionContext.Consumer>
             {value => (
