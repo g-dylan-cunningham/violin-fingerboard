@@ -1,0 +1,17 @@
+.string-container {
+    height: 50px;
+    width: 500px;
+    display: flex;
+
+}
+
+.note-container {
+    flex-direction: row;
+    height: 50px;
+    width: 70px;
+    background-color: red;
+    border: 3px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
