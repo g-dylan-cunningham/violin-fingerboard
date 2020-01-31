@@ -14,20 +14,20 @@ function SoundPlayer(audioContext, filterNode) {
   }
   
   SoundPlayer.prototype.setFrequency = function(val, when) {
-    if(when) {
-      this.oscillator.frequency.setValueAtTime(val, this.audioCtx.currentTime + when);
-    } else {
+    // if(when) {
+    //   this.oscillator.frequency.setValueAtTime(val, this.audioCtx.currentTime + when);
+    // } else {
       this.oscillator.frequency.setValueAtTime(val, this.audioCtx.currentTime);
-    }
+    // }
     return this;
   };
   
   SoundPlayer.prototype.setVolume = function(val, when) {
-    if(when) {
-      this.gainNode.gain.exponentialRampToValueAtTime(val, this.audioCtx.currentTime + when);
-    } else {
+    // if(when) {
+    //   this.gainNode.gain.exponentialRampToValueAtTime(val, this.audioCtx.currentTime + when);
+    // } else {
       this.gainNode.gain.setValueAtTime(val, this.audioCtx.currentTime);
-    }
+    // }
     return this;
   };
   
@@ -37,10 +37,9 @@ function SoundPlayer(audioContext, filterNode) {
   };
   
   SoundPlayer.prototype.play = function(freq, vol, wave, when) {
-      debugger
     this.oscillator = this.audioCtx.createOscillator();
     this.oscillator.connect(this.gainNode);
-    // this.setFrequency(freq);
+    this.setFrequency(freq);
     if(wave) {
       this.setWaveType(wave);
     }

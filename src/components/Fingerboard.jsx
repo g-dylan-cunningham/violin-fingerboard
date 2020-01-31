@@ -4,6 +4,7 @@ import { keyOfC } from "../notesInKeys"
 import './Fingerboard.css'
 import { QuestionContext } from '../App';
 import SoundPlayer from '../utils/soundPlayer';
+import pitches from '../utils/pitches';
 
 
 const Fingerboard = () => {
@@ -32,17 +33,26 @@ const String = ({arr}) => {
 }
 
 const Note = ({obj}) => {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const audio = new AudioContext();
-    // console.log(audio)
-    (new SoundPlayer(audio)).play(440.0, 0.8, "sine").stop(0.5);
+
+
+
+    const handleClick = () => {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const audio = new AudioContext();
+        // console.log(audio)
+        // debugger
+        const pitch = parseFloat(pitches[obj.note + (obj.octave.toString())]);
+        (new SoundPlayer(audio)).play(pitch, 0.8, "sine").stop(0.5);
+    }
+
+
 
 
 
     return (
         <QuestionContext.Consumer>
             {value => (
-                <div className="note-container">{obj.note}</div>
+                <div onClick={handleClick} className="note-container">{obj.note}</div>
             )}
 
         </QuestionContext.Consumer>
