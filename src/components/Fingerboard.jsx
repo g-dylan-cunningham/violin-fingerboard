@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { generateRichKey } from '../utils/generateRichKey';
 import { keyOfC } from "../notesInKeys"
 import './Fingerboard.css'
@@ -33,16 +33,16 @@ const String = ({arr}) => {
 }
 
 const Note = ({obj}) => {
-
-
-
+    const [isHidden, setIsHidden] = useState('none');
     const handleClick = () => {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const audio = new AudioContext();
-        // console.log(audio)
-        // debugger
         const pitch = parseFloat(pitches[obj.note + (obj.octave.toString())]);
         (new SoundPlayer(audio)).play(pitch, 0.8, "sine").stop(0.5);
+        setIsHidden('');
+        setTimeout(()=> {
+            setIsHidden('none');
+        }, 1000);
     }
 
 
@@ -52,7 +52,9 @@ const Note = ({obj}) => {
     return (
         <QuestionContext.Consumer>
             {value => (
-                <div onClick={handleClick} className="note-container">{obj.note}</div>
+                <div onClick={handleClick} className="note-container">{obj.note}
+                    <img style={{display:isHidden, position: 'absolute', left: 0, bottom: 0}}src={obj.image} />
+                </div>
             )}
 
         </QuestionContext.Consumer>

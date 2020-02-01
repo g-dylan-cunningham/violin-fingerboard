@@ -7,12 +7,11 @@ class NoteFactory {
     getNote() {
 
       console.log("r", this.note, this.octave)
-      // debugger
       if(this.note) {
         return {
           note: this.note,
           octave: this.octave,
-          image: require(`../images/low ${this.note}.png`)
+          image: require(`../images/${this.note}${this.octave}.png`)
         }
       } else return {};
 
@@ -22,12 +21,8 @@ class NoteFactory {
   
   
 export const generateRichKey = (outerArr) => {
-  // debugger;
-
   return outerArr.map((innerArr) => {
-    
     return innerArr.map(note => { 
-
       return new NoteFactory(note[0], note[1]).getNote()
     })
   })
