@@ -1,5 +1,6 @@
 import React from 'react';
 import Fingerboard from './components/Fingerboard';
+import RangePicker from './components/RangePicker';
 
 export const QuestionContext = React.createContext('c');
 
@@ -9,7 +10,7 @@ class App extends React.Component {
     return (
       <QuestionContext.Provider value='c'>
       <div className="App">
-        app
+        <RangePicker />
         <Fingerboard />
       </div>
       </QuestionContext.Provider>

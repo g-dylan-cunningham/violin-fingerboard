@@ -5,13 +5,11 @@ class NoteFactory {
       this.octave = octave;
     }
     getNote() {
-
-      console.log("r", this.note, this.octave)
       if(this.note) {
         return {
           note: this.note,
           octave: this.octave,
-          image: require(`../images/${this.note}${this.octave}.png`)
+          image: require(`../images/${this.octave}-${this.note}.png`)
         }
       } else return {};
 

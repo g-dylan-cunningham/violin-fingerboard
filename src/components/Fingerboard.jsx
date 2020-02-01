@@ -7,6 +7,8 @@ import SoundPlayer from '../utils/soundPlayer';
 import pitches from '../utils/pitches';
 
 
+
+
 const Fingerboard = () => {
 
     const arr = generateRichKey(keyOfC).map(string => {
@@ -48,12 +50,11 @@ const Note = ({obj}) => {
 
 
 
-
     return (
         <QuestionContext.Consumer>
             {value => (
                 <div onClick={handleClick} className="note-container">{obj.note}
-                    <img style={{display:isHidden, position: 'absolute', left: 0, bottom: 0}}src={obj.image} />
+                    <img src={obj.image} style={{display:isHidden, position: 'absolute', left: 0, bottom: 0}} alt=''/>
                 </div>
             )}
 
