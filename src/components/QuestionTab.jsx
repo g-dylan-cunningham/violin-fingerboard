@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import getRange from '../utils/tabSelector.js'
 
 
-const QuestionTab = ({rangeLimits, setCurrentNote, currentNote}) => {
+const QuestionTab = ({rangeLimits, setCurrentTestingNote, currentTestingNote, history}) => {
 
     // TODO - don't show last note twice in a row
     const [lastNote, setLastNote] = useState("");
@@ -21,17 +21,26 @@ const QuestionTab = ({rangeLimits, setCurrentNote, currentNote}) => {
         return Math.floor(Math.random() * (max + 1));
     }
 
-    const currentNote = (noteCodeList) => {
+    const CurrentNoteRenderer = ({noteCodeList, history, currentTestingNote}) => {
+        let lastAttempt = history && history.length && history[history.length-1].noteCode ? history[history.length-1].noteCode : "";
+        let randomIndex = getRandomInt(noteCodeList.length);
+        if((noteCodeList.length !== 0 
+            && history.length === 0 
+            && !currentTestingNote) 
+            || currentTestingNote === lastAttempt) {
+                console.log('correct guess', currentTestingNote,lastAttempt)
+                setCurrentTestingNote(noteCodeList[randomIndex]);
+        } else {
+            console.log("incorrect guess", currentTestingNote, lastAttempt)
+        }
 
-        let index = getRandomInt(noteCodeList.length);
-        setCurrentNote(noteCodeList[index]);
-        return noteCodeList[index];
+        return <div>QUESTION: {currentTestingNote}</div>;
     }
 
 
     return (
         <div>
-            {currentNote}
+            <CurrentNoteRenderer noteCodeList={noteCodeList} currentTestingNote={currentTestingNote} history={history}/>
         </div>
     )
     // return note;

@@ -11,24 +11,24 @@ class App extends React.Component {
     super()
     this.state = {
       rangeLimits: [],
-      currentNote: "c",
-      history: []
+      currentTestingNote: "",
+      history: [],
     };
     this.handleRangeSubmit = this.handleRangeSubmit.bind(this);
-    this.setCurrentNote = this.setCurrentNote.bind(this);
+    this.setCurrentTestingNote = this.setCurrentTestingNote.bind(this);
     this.setAttempt = this.setAttempt.bind(this);
   }
 
   handleRangeSubmit(range) {
     this.setState({rangeLimits: range})
-    console.log("state",this.state)
+    console.log("state - handleRangeSubmit",this.state)
   }
 
-  setCurrentNote(note) {
+  setCurrentTestingNote(currentTestingNote) {
     this.setState({
-      note: note
+      currentTestingNote: currentTestingNote
     })
-    console.log("state",this.state)
+    console.log("state - setCurrentTestingNote",this.state)
   }
 
   setAttempt(attempt) {
@@ -36,16 +36,16 @@ class App extends React.Component {
       const newHistory = prevState.history.concat(attempt);
        return {history: newHistory};
     })
-    console.log("state",this.state)
+    console.log("state setAttempt",this.state)
   }
   render() {
-    const { rangeLimits } = this.state;
+    const { rangeLimits, history, currentTestingNote } = this.state;
     return (
       <QuestionContext.Provider value={this.state}>
       <div className="App">
         
         <RangePicker setRange={this.handleRangeSubmit}/>
-        <QuestionTab rangeLimits={rangeLimits} setCurrentNote={this.setCurrentNote}/>
+        <QuestionTab rangeLimits={rangeLimits} setCurrentTestingNote={this.setCurrentTestingNote} currentTestingNote={currentTestingNote} history={history}/>
         <Fingerboard setAttempt={this.setAttempt}/>
       </div>
       </QuestionContext.Provider>
