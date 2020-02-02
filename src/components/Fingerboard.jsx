@@ -6,13 +6,10 @@ import { QuestionContext } from '../App';
 import SoundPlayer from '../utils/soundPlayer';
 import pitches from '../utils/pitches';
 
-
-
-
-const Fingerboard = () => {
+const Fingerboard = ({setAttempt}) => {
 
     const arr = generateRichKey(keyOfC).map(string => {
-        return <String arr={string} />
+        return <String arr={string} setAttempt={setAttempt}/>
     })
 
     return (
@@ -22,21 +19,22 @@ const Fingerboard = () => {
     )
 }
 
-const String = ({arr}) => {
+const String = ({arr, setAttempt}) => {
     return (
         <div className="string-container">
             {
                 arr.map(note => {
-                    return <Note obj={note} />
+                    return <Note obj={note} setAttempt={setAttempt}/>
                 })
             }
         </div>
     )
 }
 
-const Note = ({obj}) => {
+const Note = ({obj, setAttempt}) => {
     const [isHidden, setIsHidden] = useState('none');
     const handleClick = () => {
+        setAttempt(obj);
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const audio = new AudioContext();
         const pitch = parseFloat(pitches[obj.note + (obj.octave.toString())]);

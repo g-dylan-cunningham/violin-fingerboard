@@ -1,17 +1,19 @@
 class NoteFactory {
     
-    constructor(note, octave) {
+    constructor(note, octave, noteCode) {
       this.note = note;
       this.octave = octave;
+      this.noteCode = noteCode;
     }
     getNote() {
       if(this.note) {
         return {
           note: this.note,
           octave: this.octave,
+          noteCode: this.noteCode,
           image: require(`../images/${this.octave}-${this.note}.png`)
         }
-      } else return {};
+      } else return {noteCode: this.noteCode};
 
     }
   }
@@ -21,7 +23,8 @@ class NoteFactory {
 export const generateRichKey = (outerArr) => {
   return outerArr.map((innerArr) => {
     return innerArr.map(note => { 
-      return new NoteFactory(note[0], note[1]).getNote()
+      const noteCode = note[1]+"-"+note[0];
+      return new NoteFactory(note[0], note[1], noteCode).getNote()
     })
   })
 }

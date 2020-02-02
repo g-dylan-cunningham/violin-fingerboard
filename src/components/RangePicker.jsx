@@ -33,11 +33,12 @@ class RangePicker extends React.Component {
     }
   
     handleSubmit(event) {
-      alert(this.state.lowOctave + this.state.highOctave + this.state.lowNote + this.state.highNote);
+      this.props.setRange([this.state.lowOctave, this.state.highOctave, this.state.lowNote, this.state.highNote])
       event.preventDefault();
     }
   
     render() {
+
       return (
         <form onSubmit={this.handleSubmit}>
           <label>
