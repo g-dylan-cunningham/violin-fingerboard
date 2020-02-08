@@ -19,6 +19,7 @@ const getRange = ([lowerOctave, upperOctave, lowestNote, highestNote] ) => {
         if(start && !end) {
             return note;
         }
+        // else return n
         
     })
 
