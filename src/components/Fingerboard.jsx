@@ -6,10 +6,10 @@ import { QuestionContext } from '../App';
 import SoundPlayer from '../utils/soundPlayer';
 import pitches from '../utils/pitches';
 
-const Fingerboard = ({setAttempt}) => {
+const Fingerboard = ({setAttempt, currentTestingNote}) => {
 
-    const arr = generateRichKey(keyOfC).map(string => {
-        return <String arr={string} setAttempt={setAttempt}/>
+    const arr = generateRichKey(keyOfC).map((string, i) => {
+        return <String arr={string} setAttempt={setAttempt} currentTestingNote={currentTestingNote} key={i}/>
     })
 
     return (
@@ -19,19 +19,19 @@ const Fingerboard = ({setAttempt}) => {
     )
 }
 
-const String = ({arr, setAttempt}) => {
+const String = ({arr, setAttempt, currentTestingNote}) => {
     return (
         <div className="string-container">
             {
-                arr.map(note => {
-                    return <Note obj={note} setAttempt={setAttempt}/>
+                arr.map((note, i) => {
+                    return <Note obj={note} setAttempt={setAttempt} currentTestingNote={currentTestingNote} key={i} />
                 })
             }
         </div>
     )
 }
 
-const Note = ({obj, setAttempt}) => {
+const Note = ({obj, setAttempt, currentTestingNote}) => {
     const [isHidden, setIsHidden] = useState('none');
     const handleClick = () => {
         setAttempt(obj);
@@ -46,7 +46,7 @@ const Note = ({obj, setAttempt}) => {
     }
 
 
-
+    // console.log(currentTestingNote,' currentTESTING NOTE')
 
     return (
         <QuestionContext.Consumer>

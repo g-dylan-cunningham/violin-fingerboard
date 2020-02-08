@@ -22,7 +22,6 @@ class RangePicker extends React.Component {
       this.setState({lowOctave: event.target.value});
     }
     handleHighOctaveChange(event) {
-        debugger
         this.setState({highOctave: event.target.value});
     }
     handleLowNoteChange(event) {
